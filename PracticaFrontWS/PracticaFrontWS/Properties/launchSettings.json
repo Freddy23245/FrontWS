@@ -1,0 +1,29 @@
+﻿{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:22003",
+      "sslPort": 0
+    }
+  },
+  "profiles": {
+    "PracticaFrontWS": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "applicationUrl": "http://localhost:5290",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "URLPracticaWS": "http://localhost:63923/PracticaWS.asmx"
+      }
+    },
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

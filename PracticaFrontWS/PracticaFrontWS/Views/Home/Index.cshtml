@@ -1,0 +1,49 @@
+﻿@model List<PersonaViewModel>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="inline text-center">  
+@*    <form method="post" asp-action="Index" asp-controller="Home" class="form-inline text-center">*@
+        <div class="form-group mb-2">
+            <input type="text" class="form-control" id="ApellidoYNombre" name="ApellidoYNombre" placeholder="Buscar" />
+        </div>
+        <input type="hidden" id="UrlPostBuscarPersonas" value="@Url.Action("Filtrar","Home")" />
+        <button type="button" id="botonBuscar" class="btn btn-primary mb-4">Buscar</button>
+@*   </form>*@
+    
+</div>
+<div class="container mt-5">
+    <a href="@Url.Action("Create","Home")" class="btn btn-success mb-3">Agregar</a>
+    <a href="@Url.Action("GenerarPDF","Home")" id="Descargar" class="btn btn-primary mb-3">Descargar PDF</a>
+@*    <input type="hidden" id="UrlGenerarPDF" value="@Url.Action("GenerarPDF","Home")" />
+    <input type="hidden" id="UrlVerPDF" value="@Url.Action("Visualizador","Home")" />*@
+
+</div>
+
+<div class="container">
+    <div class="row">
+        <table class="table table-bordered text-center">
+            <thead>
+                <tr>
+
+                    <th>Cuil</th>
+                    <th>Apellido y Nombre</th>
+                    <th>Fecha Nacimiento</th>
+                    <th>Zona de Residencia</th>
+                    <th>Detalles</th>
+                </tr>
+            </thead>
+            <tbody id="resultados">
+        
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    window.addEventListener("load", function (event) {
+        buscar.init();
+        //pdf.init();
+    });
+</script>

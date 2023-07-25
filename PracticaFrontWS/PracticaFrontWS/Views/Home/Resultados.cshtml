@@ -1,0 +1,32 @@
+﻿<div class="container">
+    <div class="row">
+        <table class="table table-bordered text-center">
+            <thead>
+                <tr>
+
+                    <th>Cuil</th>
+                    <th>Apellido y Nombre</th>
+                    <th>Fecha Nacimiento</th>
+                    <th>Zona de Residencia</th>
+                    <th>Detalles</th>
+                </tr>
+            </thead>
+            <tbody>
+      @*          @foreach (var item in Model)
+                {
+                    <tr id="resultados">
+                        <td>@item.Cuil</td>
+                        <td>@item.ApellidoYNombre</td>
+                        <td>@item.FechaNacimiento.ToString("dd/MM/yyyy")</td>
+                        <td>@item.zona</td>
+                        <td>
+                            <a href="@Url.Action("Detalle", "Home", new { id = item.id})" class="btn btn-primary">Ver detalle</a>
+
+                        </td>
+                    </tr>
+
+                }*@
+            </tbody>
+        </table>
+    </div>
+</div>
