@@ -9,6 +9,7 @@ using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Microsoft.AspNetCore.Routing.Constraints;
 using Microsoft.AspNetCore.Hosting.Server;
+using PracticaFrontWS.Services.Implementaciones;
 
 namespace PracticaFrontWS.Controllers
 {
@@ -113,50 +114,56 @@ namespace PracticaFrontWS.Controllers
         [HttpPost]
         public IActionResult GenerarFactura(FacturaViewModel factura)
         {
+            //FacturaA.GenerarFactura(factura);
+            //return View();
             using (MemoryStream ms = new MemoryStream())
             {
 
                 Document document = new Document(PageSize.A4, 50, 50, 25, 25);
                 PdfWriter writer = PdfWriter.GetInstance(document, ms);
                 document.Open();
-          
-                PdfPTable tableTop = new PdfPTable(1);
-                tableTop.WidthPercentage = 10;
-                tableTop.DefaultCell.Border = Rectangle.NO_BORDER;
 
-                PdfPCell cell = new PdfPCell(new Phrase("A"));
-                cell.Padding = 1;
-                cell.BorderWidth = 2f; // Grosor del borde
-                cell.BorderColor = BaseColor.BLACK; // Color del borde
-                cell.FixedHeight = 40;
-    
-                cell.HorizontalAlignment = Element.ALIGN_CENTER;
-                cell.VerticalAlignment = Element.ALIGN_MIDDLE;
-                tableTop.AddCell(cell);
-                document.Add(tableTop);
-                document.Add(new Paragraph("    " + Chunk.NEWLINE));
+                //PdfPTable tableTop = new PdfPTable(1);
+                //tableTop.WidthPercentage = 10;
+                //tableTop.DefaultCell.Border = Rectangle.NO_BORDER;
+
+                //PdfPCell cell = new PdfPCell(new Phrase("A"));
+                //cell.Padding = 1;
+                //cell.BorderWidth = 2f; 
+                //cell.BorderColor = BaseColor.BLACK; 
+                //cell.FixedHeight = 40;
+                //cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                //cell.VerticalAlignment = Element.ALIGN_MIDDLE;
+
+                //tableTop.AddCell(cell);
+                //document.Add(tableTop);
+                //document.Add(new Paragraph("    " + Chunk.NEWLINE));
                 var fechaActual = DateTime.Today;
-                var tbl = new PdfPTable(new float[] { 50f,50f }) { WidthPercentage = 100, PaddingTop = 10 };
-                tbl.AddCell(new PdfPCell(new Phrase("LA IMPRENTA S.A."  + Environment.NewLine +
+                Font font = new Font(Font.FontFamily.HELVETICA, 26, Font.BOLD);
+                var tbl = new PdfPTable(new float[] { 30f,10f ,40f }) { WidthPercentage = 100, PaddingTop = 0,SpacingBefore = -10};
+           
+                tbl.AddCell(new PdfPCell(new Phrase("LA IMPRENTA S.A." + Environment.NewLine +
                    "IMPRENTA Y LIBRERIA " + Environment.NewLine +
-                   "El Salvador 689 -(1406) Capital Federal " + Environment.NewLine +
-                   "Tel. 4616-1112 / 4639-0048") ) { Border = 0, Rowspan = 3 });
-
+                   "El Salvador 689 - (1406) Capital Federal " + Environment.NewLine +
+                   "Tel. 4616-1112 / 4639-0048"))
+                { Border = 0, Rowspan = 3 });
+                tbl.AddCell(new PdfPCell(new Phrase("A", font )) {Rowspan =3, VerticalAlignment =Element.ALIGN_MIDDLE,HorizontalAlignment = Element.ALIGN_CENTER });
                 tbl.AddCell(new PdfPCell(new Phrase("Factura" + Environment.NewLine + "Nº 000001")));
-                tbl.AddCell(new PdfPCell(new Phrase("Fecha" + fechaActual.ToString("dd/MM/yyyy"))));
-                tbl.AddCell(new PdfPCell(new Phrase("CUIT:45466546  " + Environment.NewLine
-                    + " ING BRUTOS:65466663"))
-                { Padding = 2});
-
+                tbl.AddCell(new PdfPCell(new Phrase("Fecha: " + fechaActual.ToString("dd/MM/yyyy"))));
+                tbl.AddCell(new PdfPCell(new Phrase("CUIT:30-68914583-0 " + Environment.NewLine + "INGRESOS BRUTOS:CM. 901-11111-0" + Environment.NewLine + "Inicio de Activicades :01/04/1994")));
+                //tbl.SpacingAfter = 10f;
                 document.Add(tbl);
 
-                document.Add(new Paragraph("    " + Chunk.NEWLINE));
-          
+                document.Add(new Paragraph("IVA:Responsable Inscripto"));
+              
+               
+
                 //Parte Cliente
                 PdfPTable talbleCliente = new PdfPTable(1);
                 talbleCliente.WidthPercentage = 100;
                 talbleCliente.DefaultCell.Border = Rectangle.NO_BORDER;
-
+                talbleCliente.SpacingBefore = 5f;//espacio antes
+                talbleCliente.SpacingAfter = 5f;//espacio despues
                 PdfPCell cellCliente = new PdfPCell(new Phrase(" Señores:  " + factura.clientes +
                     Environment.NewLine +
                     " Direccion: " + factura.direccion +
@@ -177,7 +184,7 @@ namespace PracticaFrontWS.Controllers
                 //Parte Condicion Venta
                 PdfPTable tableCondicion = new PdfPTable(2);
                 tableCondicion.WidthPercentage = 100;
-
+                tableCondicion.SpacingAfter = 10f;
                 tableCondicion.AddCell("Condiciones de Venta: " + factura.condicionVenta);
                 tableCondicion.AddCell("Remito Nº: " + factura.remito);
 
@@ -186,32 +193,32 @@ namespace PracticaFrontWS.Controllers
                 PdfPTable table = new PdfPTable(5);
                 table.WidthPercentage = 100;
                 PdfPCell cell1 = new PdfPCell();
-               var cel = cell1.Border = Rectangle.NO_BORDER;
+                var cel = cell1.Border = Rectangle.NO_BORDER;
                 table.AddCell("Codigo");
                 table.AddCell("Cantidad");
                 table.AddCell("Detalle");
                 table.AddCell("P. Unitario");
                 table.AddCell("Total $");
-                table.AddCell( new PdfPCell(new Phrase(factura.codigo)) { Border = 0 ,FixedHeight = 150});
-                table.AddCell( new PdfPCell(new Phrase(Convert.ToString(factura.cantidad))) { Border = 0 });
+                table.AddCell(new PdfPCell(new Phrase(factura.codigo)) { Border = 0, FixedHeight = 150 });
+                table.AddCell(new PdfPCell(new Phrase(Convert.ToString(factura.cantidad))) { Border = 0 });
                 table.AddCell(new PdfPCell(new Phrase(factura.detalle)) { Border = 0 });
                 table.AddCell(new PdfPCell(new Phrase(Convert.ToString(factura.precioUnitario))) { Border = 0 });
-               
+
                 factura.total = factura.precioUnitario * factura.cantidad;
                 factura.impuesto = 2;
                 factura.Iva = 21;
-                var totalImpuesto = factura.total * (factura.impuesto/100);
+                var totalImpuesto = factura.total * (factura.impuesto / 100);
                 var TotalIncImpuesto = factura.total + totalImpuesto;
-                var TotalIncIva = TotalIncImpuesto * (factura.Iva/100);
+                var TotalIncIva = TotalIncImpuesto * (factura.Iva / 100);
                 var TotalFinal = factura.total + TotalIncIva + totalImpuesto;
                 table.AddCell(new PdfPCell(new Phrase(Convert.ToString(factura.total))) { Border = 0 });
 
                 document.Add(table);
 
                 document.Add(Chunk.NEWLINE);
-                PdfPTable tableSubtotal = new PdfPTable(6); 
-                tableSubtotal.WidthPercentage = 100; 
-         
+                PdfPTable tableSubtotal = new PdfPTable(6);
+                tableSubtotal.WidthPercentage = 100;
+
                 tableSubtotal.AddCell("SubTotal");
                 tableSubtotal.AddCell("Impuesto");
                 tableSubtotal.AddCell("Subtotal");
@@ -227,14 +234,19 @@ namespace PracticaFrontWS.Controllers
                 tableSubtotal.AddCell(TotalFinal.ToString("0.00"));
 
                 document.Add(tableSubtotal);
-               
-                PdfPTable tablePie = new PdfPTable(1);
-                tablePie.WidthPercentage = 100; 
+
+                PdfPTable tablePie = new PdfPTable(2);
+                tablePie.WidthPercentage = 100;
 
                 PdfPCell cellPie = new PdfPCell();
-          
+                cellPie.BorderWidthRight = 0;
                 cellPie.VerticalAlignment = Element.ALIGN_MIDDLE;
                 cellPie.HorizontalAlignment = Element.ALIGN_CENTER;
+
+                PdfPCell cellPie2 = new PdfPCell();
+                cellPie2.BorderWidthLeft = 0;
+                cellPie2.VerticalAlignment = Element.ALIGN_RIGHT;
+                cellPie2.HorizontalAlignment = Element.ALIGN_RIGHT;
 
                 var ImagenRuta = @"c:\Users\Cristian\Desktop\practicaWS\FrontWS\PracticaFrontWS\PracticaFrontWS\wwwroot\img\codBarra.png";
 
@@ -245,15 +257,17 @@ namespace PracticaFrontWS.Controllers
                       "Fecha de Vto.: 13-06-2024");
 
                 cellPie.AddElement(imagen);
-                cellPie.AddElement(desc);
+                cellPie2.AddElement(desc);
 
                 tablePie.AddCell(cellPie);
+                tablePie.AddCell(cellPie2);
 
                 document.Add(tablePie);
                 document.Close();
                 return File(ms.ToArray(), "application/pdf", "Factura.pdf");
             }
         }
+
         public IActionResult Visualizador()
         {
             var pdfFilePath = @"c:\Users\Cristian\Downloads\ejemplo.pdf";
