@@ -1,0 +1,53 @@
+﻿<div class="container mt-5">
+    <div class="row">
+        <div class="col">
+            <h2 class="mb-4">Factura</h2>
+            <form method="post" asp-action="GenerarFactura" asp-controller="Home">
+                <!-- Datos del Emisor -->
+          
+                <!-- Datos del Cliente -->
+                <div class="mb-3">
+                    <label for="cliente">Cliente:</label>
+                    <input type="text" class="form-control" name="clientes" id="cliente" placeholder="clientes">
+                </div>
+                <div class="mb-3">
+                    <label for="direccionCliente">Dirección:</label>
+                    <input type="text" class="form-control" name="direccion" id="direccionCliente" placeholder="direccion">
+                </div>
+                <div class="mb-3">
+                    <label for="cuitCliente">CUIL/CUIT:</label>
+                    <input type="text" class="form-control" name="CUIT" id="cuitCliente" placeholder="CUIT">
+                </div>
+                <!-- Detalle de la Condicion -->
+                <div class="mb-3">
+                    <label for="">Condicion de Venta:</label>
+                    <input type="text" class="form-control" name="condicionVenta" placeholder="Condicion de Venta">
+                </div>
+                <div class="mb-3">
+                    <label for="">Numero de Remito:</label>
+                    <input type="text" class="form-control" name="remito" placeholder="Numero de Remito">
+                </div>
+  
+                <!--detalles-->
+                <div class="mb-3">
+                    <label for="">Codigo:</label>
+                    <input type="text" class="form-control" name="codigo" placeholder="Codigo">
+                </div>
+                <div class="mb-3">
+                    <label for="">Cantidad:</label>
+                    <input type="text" class="form-control" name="cantidad" placeholder="Cantidad">
+                </div>
+                <div class="mb-3">
+                    <label for="">Detalle:</label>
+                    <input type="text" class="form-control" name="detalle" placeholder="Detalle">
+                </div>
+
+                <div class="mb-3">
+                    <label for="">Precio Unitario:</label>
+                    <input type="text" class="form-control" name="precioUnitario" placeholder="Precio Unitario">
+                </div>
+                <button type="submit" class="btn btn-primary">Generar Factura</button>
+            </form>
+        </div>
+    </div>
+</div>
