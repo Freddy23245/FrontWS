@@ -8,6 +8,7 @@ using System.IO;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Microsoft.AspNetCore.Routing.Constraints;
+using Microsoft.AspNetCore.Hosting.Server;
 
 namespace PracticaFrontWS.Controllers
 {
@@ -122,7 +123,6 @@ namespace PracticaFrontWS.Controllers
                 PdfPTable tableTop = new PdfPTable(1);
                 tableTop.WidthPercentage = 10;
                 tableTop.DefaultCell.Border = Rectangle.NO_BORDER;
-          
 
                 PdfPCell cell = new PdfPCell(new Phrase("A"));
                 cell.Padding = 1;
@@ -134,7 +134,7 @@ namespace PracticaFrontWS.Controllers
                 cell.VerticalAlignment = Element.ALIGN_MIDDLE;
                 tableTop.AddCell(cell);
                 document.Add(tableTop);
-                document.Add(Chunk.NEWLINE);
+                document.Add(new Paragraph("    " + Chunk.NEWLINE));
                 var fechaActual = DateTime.Today;
                 var tbl = new PdfPTable(new float[] { 50f,50f }) { WidthPercentage = 100, PaddingTop = 10 };
                 tbl.AddCell(new PdfPCell(new Phrase("LA IMPRENTA S.A."  + Environment.NewLine +
@@ -147,7 +147,6 @@ namespace PracticaFrontWS.Controllers
                 tbl.AddCell(new PdfPCell(new Phrase("CUIT:45466546  " + Environment.NewLine
                     + " ING BRUTOS:65466663"))
                 { Padding = 2});
-
 
                 document.Add(tbl);
 
@@ -183,9 +182,7 @@ namespace PracticaFrontWS.Controllers
                 tableCondicion.AddCell("Remito Nº: " + factura.remito);
 
                 document.Add(tableCondicion);
-
                 //Fin Condicion Venta
-
                 PdfPTable table = new PdfPTable(5);
                 table.WidthPercentage = 100;
                 PdfPCell cell1 = new PdfPCell();
@@ -212,8 +209,8 @@ namespace PracticaFrontWS.Controllers
                 document.Add(table);
 
                 document.Add(Chunk.NEWLINE);
-                PdfPTable tableSubtotal = new PdfPTable(6); // Tabla con 3 columnas para el detalle
-                tableSubtotal.WidthPercentage = 100; // La tabla ocupa el 100% del ancho de la página
+                PdfPTable tableSubtotal = new PdfPTable(6); 
+                tableSubtotal.WidthPercentage = 100; 
          
                 tableSubtotal.AddCell("SubTotal");
                 tableSubtotal.AddCell("Impuesto");
@@ -230,10 +227,27 @@ namespace PracticaFrontWS.Controllers
                 tableSubtotal.AddCell(TotalFinal.ToString("0.00"));
 
                 document.Add(tableSubtotal);
-                PdfPTable tablePie = new PdfPTable(1); // Tabla con 3 columnas para el detalle
-                tablePie.WidthPercentage = 100; // La tabla ocupa el 100% del ancho de la página
+               
+                PdfPTable tablePie = new PdfPTable(1);
+                tablePie.WidthPercentage = 100; 
 
-                tablePie.AddCell("Codigo de Barra");
+                PdfPCell cellPie = new PdfPCell();
+          
+                cellPie.VerticalAlignment = Element.ALIGN_MIDDLE;
+                cellPie.HorizontalAlignment = Element.ALIGN_CENTER;
+
+                var ImagenRuta = @"c:\Users\Cristian\Desktop\practicaWS\FrontWS\PracticaFrontWS\PracticaFrontWS\wwwroot\img\codBarra.png";
+
+                iTextSharp.text.Image imagen = iTextSharp.text.Image.GetInstance(ImagenRuta);
+                imagen.ScaleToFit(100f, 100f);
+
+                Phrase desc = new Phrase("C.A.I. Nº:25064106537080 " + Environment.NewLine +
+                      "Fecha de Vto.: 13-06-2024");
+
+                cellPie.AddElement(imagen);
+                cellPie.AddElement(desc);
+
+                tablePie.AddCell(cellPie);
 
                 document.Add(tablePie);
                 document.Close();
