@@ -232,17 +232,17 @@ namespace PracticaFrontWS.Controllers
 
                 PdfPCell cellPie2 = new PdfPCell();
                 cellPie2.BorderWidthLeft = 0;
-                cellPie2.VerticalAlignment = Element.ALIGN_RIGHT;
-                cellPie2.HorizontalAlignment = Element.ALIGN_RIGHT;
+                cellPie2.VerticalAlignment = Element.ALIGN_MIDDLE;
+                cellPie2.HorizontalAlignment = Element.ALIGN_MIDDLE;
 
                 BarcodeQRCode barcodeQRCode = new BarcodeQRCode(Convert.ToString(numeroAleatorio), 100, 100, null);
                 Image codeQRImage = barcodeQRCode.GetImage();
-                codeQRImage.ScaleAbsolute(200, 200);
+                codeQRImage.ScaleAbsolute(100, 100);
 
                 iTextSharp.text.Image imagen = iTextSharp.text.Image.GetInstance(codeQRImage);
                 imagen.ScaleToFit(100f, 100f);
-                Phrase desc = new Phrase("C.A.I. Nº:25064106537080 " + Environment.NewLine +
-                      "Fecha de Vto.: 13-06-2024");
+                Phrase desc = new Phrase("            C.A.I. Nº:25064106537080 " + Environment.NewLine +
+                      "            Fecha de Vto.: 13-06-2024");
                 cellPie.AddElement(imagen);
                 cellPie2.AddElement(desc);
 
