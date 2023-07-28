@@ -155,9 +155,8 @@ namespace PracticaFrontWS.Controllers
                     Environment.NewLine +
                     " Direccion: " + factura.direccion +
                     Environment.NewLine +
-                    " L.V.A: Responsable Inscripto " +
-                    Environment.NewLine +
-                    " C.U.I.T: " + factura.CUIT));
+                    " L.V.A: Responsable Inscripto                                       " + " C.U.I.T: " + factura.CUIT));
+
                 cellCliente.Padding = 5;
                 cellCliente.BorderWidth = 1f;
                 cellCliente.BorderColor = BaseColor.BLACK;
@@ -186,7 +185,7 @@ namespace PracticaFrontWS.Controllers
                 table.AddCell("Detalle");
                 table.AddCell("P. Unitario");
                 table.AddCell("Total $");
-                table.AddCell(new PdfPCell(new Phrase(factura.codigo)) { Border = 0, FixedHeight = 150 });
+                table.AddCell(new PdfPCell(new Phrase(factura.codigo)) {BorderWidthRight = 0,BorderWidthBottom = 0, FixedHeight = 300 });
                 table.AddCell(new PdfPCell(new Phrase(Convert.ToString(factura.cantidad))) { Border = 0 });
                 table.AddCell(new PdfPCell(new Phrase(factura.detalle)) { Border = 0 });
                 table.AddCell(new PdfPCell(new Phrase(Convert.ToString(factura.precioUnitario))) { Border = 0 });
@@ -198,11 +197,10 @@ namespace PracticaFrontWS.Controllers
                 var TotalIncImpuesto = factura.total + totalImpuesto;
                 var TotalIncIva = TotalIncImpuesto * (factura.Iva / 100);
                 var TotalFinal = factura.total + TotalIncIva + totalImpuesto;
-                table.AddCell(new PdfPCell(new Phrase(Convert.ToString(factura.total))) { Border = 0 });
+                table.AddCell(new PdfPCell(new Phrase(Convert.ToString(factura.total))) { BorderWidthLeft = 0, BorderWidthBottom = 0, FixedHeight = 300 });
 
                 document.Add(table);
 
-                document.Add(Chunk.NEWLINE);
                 PdfPTable tableSubtotal = new PdfPTable(6);
                 tableSubtotal.WidthPercentage = 100;
 
