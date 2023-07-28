@@ -129,11 +129,6 @@ namespace PracticaFrontWS.Controllers
                 Font fontcod = new Font(Font.FontFamily.HELVETICA, 10, Font.NORMAL);
                 var tbl = new PdfPTable(new float[] { 30f,10f ,2f,35f }) { WidthPercentage = 100, PaddingTop = 0,SpacingBefore = -10};
 
-                //tbl.AddCell(new PdfPCell(new Phrase(
-
-                //   "El Salvador 689 - (1406) Capital Federal " + Environment.NewLine +
-                //   "Tel. 4616-1112 / 4639-0048"))
-                //{ Border = 0, Rowspan = 1 });
                 tbl.AddCell(new PdfPCell(new Phrase("LA IMPRENTA S.A.", fontTitulo)) { Border = 0 , HorizontalAlignment = Element.ALIGN_CENTER});
                 tbl.AddCell(new PdfPCell(new Phrase("A", font )){ Rowspan =2, VerticalAlignment =Element.ALIGN_MIDDLE,HorizontalAlignment = Element.ALIGN_CENTER });
                
