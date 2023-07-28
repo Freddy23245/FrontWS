@@ -232,10 +232,12 @@ namespace PracticaFrontWS.Controllers
                 cellPie2.BorderWidthLeft = 0;
                 cellPie2.VerticalAlignment = Element.ALIGN_RIGHT;
                 cellPie2.HorizontalAlignment = Element.ALIGN_RIGHT;
-
+                BarcodeQRCode barcodeQRCode = new BarcodeQRCode("QR", 100, 100, null);
+                Image codeQRImage = barcodeQRCode.GetImage();
+                codeQRImage.ScaleAbsolute(200, 200);
                 var ImagenRuta = @"c:\Users\Cristian\Desktop\practicaWS\FrontWS\PracticaFrontWS\PracticaFrontWS\wwwroot\img\codBarra.png";
 
-                iTextSharp.text.Image imagen = iTextSharp.text.Image.GetInstance(ImagenRuta);
+                iTextSharp.text.Image imagen = iTextSharp.text.Image.GetInstance(codeQRImage);
                 imagen.ScaleToFit(100f, 100f);
                 Phrase desc = new Phrase("C.A.I. Nº:25064106537080 " + Environment.NewLine +
                       "Fecha de Vto.: 13-06-2024");
