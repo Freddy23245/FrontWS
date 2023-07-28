@@ -119,7 +119,9 @@ namespace PracticaFrontWS.Controllers
                 Document document = new Document(PageSize.A4, 50, 50, 25, 25);
                 PdfWriter writer = PdfWriter.GetInstance(document, ms);
                 document.Open();
+                Random random = new Random();
 
+                int numeroAleatorio = random.Next(10000, 100000);
                 var fechaActual = DateTime.Today;
                 Font fontTitulo = new Font(Font.FontFamily.HELVETICA, 20, Font.BOLD);
                 Font fontSubTitulo = new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL);
@@ -133,7 +135,7 @@ namespace PracticaFrontWS.Controllers
                 tbl.AddCell(new PdfPCell(new Phrase("A", font )){ Rowspan =2, VerticalAlignment =Element.ALIGN_MIDDLE,HorizontalAlignment = Element.ALIGN_CENTER });
                
                 tbl.AddCell(new PdfPCell(new Phrase("")) { Border = 0 , Rowspan= 3});
-                tbl.AddCell(new PdfPCell(new Phrase("Factura" + Environment.NewLine + "Nº 000001")));
+                tbl.AddCell(new PdfPCell(new Phrase("Factura" + Environment.NewLine + "Nº" + numeroAleatorio)));
                 tbl.AddCell(new PdfPCell(new Phrase("IMPRENTA Y LIBRERIA", fontSubTitulo)) { Border = 0, HorizontalAlignment = Element.ALIGN_CENTER });
                 tbl.AddCell(new PdfPCell(new Phrase("Fecha: " + fechaActual.ToString("dd/MM/yyyy"))));
 
@@ -232,7 +234,9 @@ namespace PracticaFrontWS.Controllers
                 cellPie2.BorderWidthLeft = 0;
                 cellPie2.VerticalAlignment = Element.ALIGN_RIGHT;
                 cellPie2.HorizontalAlignment = Element.ALIGN_RIGHT;
-                BarcodeQRCode barcodeQRCode = new BarcodeQRCode("QR", 100, 100, null);
+              
+
+                BarcodeQRCode barcodeQRCode = new BarcodeQRCode(Convert.ToString(numeroAleatorio), 100, 100, null);
                 Image codeQRImage = barcodeQRCode.GetImage();
                 codeQRImage.ScaleAbsolute(200, 200);
                 var ImagenRuta = @"c:\Users\Cristian\Desktop\practicaWS\FrontWS\PracticaFrontWS\PracticaFrontWS\wwwroot\img\codBarra.png";
