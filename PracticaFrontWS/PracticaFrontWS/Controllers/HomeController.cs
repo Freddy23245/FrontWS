@@ -85,7 +85,6 @@ namespace PracticaFrontWS.Controllers
             {
                 var fill = _session.Personas;
 
-
                 Document document = new Document(PageSize.A4, 50, 50, 25, 25);
                 PdfWriter writer = PdfWriter.GetInstance(document, ms);
                 document.Open();
@@ -103,7 +102,6 @@ namespace PracticaFrontWS.Controllers
                         table.AddCell(item.ApellidoYNombre);
                         table.AddCell(item.FechaNacimiento.ToString("dd/MM/yyyy"));
                         table.AddCell(item.zona);
-                        //Paragraph paragraph = new Paragraph(item.Cuil +" - " + item.ApellidoYNombre + " - " + item.FechaNacimiento.ToString("dd/MM/yyyy") + " - " + item.zona);
                     }
                 }
                 document.Add(table);
