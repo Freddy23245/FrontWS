@@ -121,24 +121,36 @@ namespace PracticaFrontWS.Controllers
                 document.Open();
 
                 var fechaActual = DateTime.Today;
+                Font fontTitulo = new Font(Font.FontFamily.HELVETICA, 20, Font.BOLD);
+                Font fontSubTitulo = new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL);
+                Font fontDireccion = new Font(Font.FontFamily.HELVETICA, 10, Font.NORMAL);
                 Font font = new Font(Font.FontFamily.HELVETICA, 26, Font.BOLD);
+
+                Font fontcod = new Font(Font.FontFamily.HELVETICA, 10, Font.NORMAL);
                 var tbl = new PdfPTable(new float[] { 30f,10f ,2f,35f }) { WidthPercentage = 100, PaddingTop = 0,SpacingBefore = -10};
 
-                tbl.AddCell(new PdfPCell(new Phrase("LA IMPRENTA S.A." + Environment.NewLine +
-                   "IMPRENTA Y LIBRERIA " + Environment.NewLine +
-                   "El Salvador 689 - (1406) Capital Federal " + Environment.NewLine +
-                   "Tel. 4616-1112 / 4639-0048"))
-                { Border = 0, Rowspan = 3 });
+                //tbl.AddCell(new PdfPCell(new Phrase(
 
-                tbl.AddCell(new PdfPCell(new Phrase("A", font )) {Rowspan =3, VerticalAlignment =Element.ALIGN_MIDDLE,HorizontalAlignment = Element.ALIGN_CENTER });
+                //   "El Salvador 689 - (1406) Capital Federal " + Environment.NewLine +
+                //   "Tel. 4616-1112 / 4639-0048"))
+                //{ Border = 0, Rowspan = 1 });
+                tbl.AddCell(new PdfPCell(new Phrase("LA IMPRENTA S.A.", fontTitulo)) { Border = 0 , HorizontalAlignment = Element.ALIGN_CENTER});
+                tbl.AddCell(new PdfPCell(new Phrase("A", font )){ Rowspan =2, VerticalAlignment =Element.ALIGN_MIDDLE,HorizontalAlignment = Element.ALIGN_CENTER });
+               
                 tbl.AddCell(new PdfPCell(new Phrase("")) { Border = 0 , Rowspan= 3});
                 tbl.AddCell(new PdfPCell(new Phrase("Factura" + Environment.NewLine + "Nº 000001")));
+                tbl.AddCell(new PdfPCell(new Phrase("IMPRENTA Y LIBRERIA", fontSubTitulo)) { Border = 0, HorizontalAlignment = Element.ALIGN_CENTER });
                 tbl.AddCell(new PdfPCell(new Phrase("Fecha: " + fechaActual.ToString("dd/MM/yyyy"))));
+                
+                
+                tbl.AddCell(new PdfPCell(new Phrase("El Salvador 689 - (1406) Capital Federal " + Environment.NewLine + "Tel. 4616-1112 / 4639-0048", fontDireccion)) { Border = 0, HorizontalAlignment = Element.ALIGN_CENTER });
+                tbl.AddCell(new PdfPCell(new Phrase("Codigo Nº 01",fontcod)) { Border = 0, HorizontalAlignment = Element.ALIGN_CENTER});
                 tbl.AddCell(new PdfPCell(new Phrase("CUIT:30-68914583-0 " + Environment.NewLine + "INGRESOS BRUTOS:CM. 901-11111-0" + Environment.NewLine + "Inicio de Activicades :01/04/1994")));
+               
                 //tbl.SpacingAfter = 10f;
                 document.Add(tbl);
 
-                document.Add(new Paragraph("IVA:Responsable Inscripto"));
+                document.Add(new Paragraph("             IVA:Responsable Inscripto",fontDireccion));
 
                 //Parte Cliente
                 PdfPTable talbleCliente = new PdfPTable(1);
@@ -234,10 +246,8 @@ namespace PracticaFrontWS.Controllers
 
                 iTextSharp.text.Image imagen = iTextSharp.text.Image.GetInstance(ImagenRuta);
                 imagen.ScaleToFit(100f, 100f);
-
                 Phrase desc = new Phrase("C.A.I. Nº:25064106537080 " + Environment.NewLine +
                       "Fecha de Vto.: 13-06-2024");
-
                 cellPie.AddElement(imagen);
                 cellPie2.AddElement(desc);
 
