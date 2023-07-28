@@ -118,36 +118,22 @@ namespace PracticaFrontWS.Controllers
             //return View();
             using (MemoryStream ms = new MemoryStream())
             {
-
                 Document document = new Document(PageSize.A4, 50, 50, 25, 25);
                 PdfWriter writer = PdfWriter.GetInstance(document, ms);
                 document.Open();
 
-                //PdfPTable tableTop = new PdfPTable(1);
-                //tableTop.WidthPercentage = 10;
-                //tableTop.DefaultCell.Border = Rectangle.NO_BORDER;
-
-                //PdfPCell cell = new PdfPCell(new Phrase("A"));
-                //cell.Padding = 1;
-                //cell.BorderWidth = 2f; 
-                //cell.BorderColor = BaseColor.BLACK; 
-                //cell.FixedHeight = 40;
-                //cell.HorizontalAlignment = Element.ALIGN_CENTER;
-                //cell.VerticalAlignment = Element.ALIGN_MIDDLE;
-
-                //tableTop.AddCell(cell);
-                //document.Add(tableTop);
-                //document.Add(new Paragraph("    " + Chunk.NEWLINE));
                 var fechaActual = DateTime.Today;
                 Font font = new Font(Font.FontFamily.HELVETICA, 26, Font.BOLD);
-                var tbl = new PdfPTable(new float[] { 30f,10f ,40f }) { WidthPercentage = 100, PaddingTop = 0,SpacingBefore = -10};
-           
+                var tbl = new PdfPTable(new float[] { 30f,10f ,2f,35f }) { WidthPercentage = 100, PaddingTop = 0,SpacingBefore = -10};
+
                 tbl.AddCell(new PdfPCell(new Phrase("LA IMPRENTA S.A." + Environment.NewLine +
                    "IMPRENTA Y LIBRERIA " + Environment.NewLine +
                    "El Salvador 689 - (1406) Capital Federal " + Environment.NewLine +
                    "Tel. 4616-1112 / 4639-0048"))
                 { Border = 0, Rowspan = 3 });
+
                 tbl.AddCell(new PdfPCell(new Phrase("A", font )) {Rowspan =3, VerticalAlignment =Element.ALIGN_MIDDLE,HorizontalAlignment = Element.ALIGN_CENTER });
+                tbl.AddCell(new PdfPCell(new Phrase("")) { Border = 0 , Rowspan= 3});
                 tbl.AddCell(new PdfPCell(new Phrase("Factura" + Environment.NewLine + "Nº 000001")));
                 tbl.AddCell(new PdfPCell(new Phrase("Fecha: " + fechaActual.ToString("dd/MM/yyyy"))));
                 tbl.AddCell(new PdfPCell(new Phrase("CUIT:30-68914583-0 " + Environment.NewLine + "INGRESOS BRUTOS:CM. 901-11111-0" + Environment.NewLine + "Inicio de Activicades :01/04/1994")));
@@ -155,8 +141,6 @@ namespace PracticaFrontWS.Controllers
                 document.Add(tbl);
 
                 document.Add(new Paragraph("IVA:Responsable Inscripto"));
-              
-               
 
                 //Parte Cliente
                 PdfPTable talbleCliente = new PdfPTable(1);
