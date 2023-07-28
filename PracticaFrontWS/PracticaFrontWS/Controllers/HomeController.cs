@@ -139,7 +139,7 @@ namespace PracticaFrontWS.Controllers
 
                 tbl.AddCell(new PdfPCell(new Phrase("El Salvador 689 - (1406) Capital Federal " + Environment.NewLine + "Tel. 4616-1112 / 4639-0048", fontDireccion)) { Border = 0, HorizontalAlignment = Element.ALIGN_CENTER });
                 tbl.AddCell(new PdfPCell(new Phrase("Codigo Nº 01",fontcod)) { Border = 0, HorizontalAlignment = Element.ALIGN_CENTER});
-                tbl.AddCell(new PdfPCell(new Phrase("CUIT:30-68914583-0 " + Environment.NewLine + "INGRESOS BRUTOS:CM. 901-11111-0" + Environment.NewLine + "Inicio de Activicades :01/04/1994")));
+                tbl.AddCell(new PdfPCell(new Phrase("CUIT:30-68914583-0 " + Environment.NewLine + "INGRESOS BRUTOS:CM. 901-11111-0" + Environment.NewLine + "Inicio de Actividades: 01/04/1994")));
 
                 document.Add(tbl);
 
