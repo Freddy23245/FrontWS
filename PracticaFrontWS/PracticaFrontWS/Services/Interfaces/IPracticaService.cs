@@ -9,5 +9,9 @@ namespace PracticaFrontWS.Services.Interfaces
         PersonaViewModel RegistrarPersonas(PersonaViewModel nuevo);
         PersonaViewModel ModificarPersona(PersonaViewModel modifica);
         PersonaViewModel EliminarPersona(PersonaViewModel elimina);
+
+        ZonasViewModel RegistrarZona(ZonasViewModel nueva);
+        ZonasViewModel ModificarZonas(ZonasViewModel modifica);
+        ZonasViewModel EliminarZona(ZonasViewModel elimina);
     }
 }

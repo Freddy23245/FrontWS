@@ -19,7 +19,7 @@ namespace PracticaFrontWS.Services.Implementaciones
         {
             var srv = new BaseService().ObtenerPracticaWS();
             var zona = srv.ObtenerZonas();
-            return zona.Select(x => PracticaService2Mapper.MapearPersona(x)).ToList();
+            return zona.Select(x => PracticaService2Mapper.MapearZonas(x)).ToList();
 
         }
         public PersonaViewModel RegistrarPersonas(PersonaViewModel nuevo)
@@ -40,6 +40,25 @@ namespace PracticaFrontWS.Services.Implementaciones
             var srv = new BaseService().ObtenerPracticaWS();
             var PerElimina = srv.EliminarPersonas((Personas)elimina);
             return PracticaServiceMapper.MapearPersona(PerElimina);
+        }
+
+        public ZonasViewModel RegistrarZona(ZonasViewModel nuevo)
+        {
+            var srv = new BaseService().ObtenerPracticaWS();
+            var nuevaZona = srv.RegistrarZonas((Zonas)nuevo);
+            return PracticaService2Mapper.MapearZonas(nuevaZona);
+        }
+        public ZonasViewModel ModificarZonas(ZonasViewModel modifica)
+        {
+            var srv = new BaseService().ObtenerPracticaWS();
+            var ModificaZona = srv.ModificarZonas((Zonas)modifica);
+            return PracticaService2Mapper.MapearZonas(ModificaZona);
+        }
+        public ZonasViewModel EliminarZona(ZonasViewModel elimina)
+        {
+            var srv = new BaseService().ObtenerPracticaWS();
+            var nuevaZona = srv.RegistrarZonas((Zonas)elimina);
+            return PracticaService2Mapper.MapearZonas(nuevaZona);
         }
     }
 }
