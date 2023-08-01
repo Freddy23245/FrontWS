@@ -261,6 +261,10 @@ namespace PracticaFrontWS.Controllers
             byte[] pdfBytes = System.IO.File.ReadAllBytes(pdfFilePath);
             return File(pdfBytes, "application/pdf");
         }
+        public IActionResult Carousel()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();
