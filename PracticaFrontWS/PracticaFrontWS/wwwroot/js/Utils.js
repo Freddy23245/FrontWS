@@ -1,4 +1,7 @@
-﻿function ModalEliminar() {
+﻿$("#hide").click(function () {
+    $("#myModal").modal("hide");
+});
+function ModalEliminar() {
     var modal = document.getElementById('myModal');
     $(modal).modal('show');
 }
@@ -13,6 +16,8 @@ function HabilitarCampos() {
     document.getElementById('habilitar').style.display = 'none';
 
 }
-$("#hide").click(function () {
-    $("#myModal").modal("hide");
-});
+
+var myCarousel = document.querySelector('#car12')
+var carousel = new bootstrap.Carousel(myCarousel, {
+    interval:3000,
+})
