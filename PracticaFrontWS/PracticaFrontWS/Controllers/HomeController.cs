@@ -273,6 +273,11 @@ namespace PracticaFrontWS.Controllers
         {
             return View();
         }
+        public IActionResult CrearZonas(ZonasViewModel nuevo)
+        {
+            _service.RegistrarZona(nuevo);
+            return RedirectToAction(nameof(Index));
+        }
         public IActionResult Factura()
         {
             return View();
