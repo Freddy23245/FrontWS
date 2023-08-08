@@ -18,8 +18,8 @@ const Utils = {
     },
 };
 const create = {
-    init:()=> {
-        create.componentes ={
+    init: () => {
+        create.componentes = {
             Cuil: $("#cuil"),
             ApellidoYNombre: $("#ApellidoYNombre"),
             FechaNacimiento: $("#FechaNacimiento"),
@@ -27,7 +27,7 @@ const create = {
             UrlPostPersonas: $("#UrlPostPersonas"),
             botonAgregar: $("#botonAgregar")
         };
-        create.componentes.botonAgregar.on('click',create.acciones.botonClick)
+        create.componentes.botonAgregar.on('click', create.acciones.botonClick)
     },
     componentes: {
         Cuil: undefined,
@@ -35,9 +35,17 @@ const create = {
         FechaNacimiento: undefined,
         idzona: undefined,
         UrlPostPersonas: undefined,
-        botonAgregar:undefined
+        botonAgregar: undefined
     },
+
     acciones: {
+        carouselPrueba: () => {
+            var myCarousel = document.querySelector('#car12')
+            var carousel = new bootstrap.Carousel(myCarousel, {
+                interval: 3000
+            })
+            
+        },
         botonClick: () => {
             if (ValidarCampos()) {
                 const Url = create.componentes.UrlPostPersonas.val();
@@ -58,7 +66,7 @@ const create = {
                         mostrarModal();
                     })
             }
-          
+
         }
     }
 };

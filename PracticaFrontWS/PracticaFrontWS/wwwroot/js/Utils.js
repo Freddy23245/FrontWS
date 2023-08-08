@@ -16,8 +16,7 @@ function HabilitarCampos() {
     document.getElementById('habilitar').style.display = 'none';
 
 }
-
 var myCarousel = document.querySelector('#car12')
 var carousel = new bootstrap.Carousel(myCarousel, {
-    interval:3000,
+    interval: 3000
 })
